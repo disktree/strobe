@@ -1,0 +1,4 @@
+
+# Strobe
+
+Stroboscopic light.
