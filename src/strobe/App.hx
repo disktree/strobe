@@ -40,8 +40,6 @@ class App {
                 element.style.backgroundColor = flashColor;
             }
         }
-
-        //document.body.style.backgroundColor = b ? '#000' : '#fff';
     }
 
     static function main() {
@@ -54,14 +52,13 @@ class App {
         controls = cast document.querySelector( 'div.controls' );
 
         var backgroundColorElement : InputElement = cast document.querySelector( 'input[name="background-color"]' );
-        backgroundColorElement.oninput = e -> backgroundColor = e.target.value;
-
-        var flashColorElement : InputElement = cast document.querySelector( 'input[name="flash-color"]' );
-        flashColorElement.oninput = e -> flashColor = e.target.value;
-
         var intervalElement : InputElement = cast document.querySelector( 'input[name="interval"]' );
         var durationElement : InputElement = cast document.querySelector( 'input[name="duration"]' );
         var transitionElement : InputElement = cast document.querySelector( 'input[name="transition"]' );
+        var flashColorElement : InputElement = cast document.querySelector( 'input[name="flash-color"]' );
+
+        backgroundColorElement.oninput = e -> backgroundColor = e.target.value;
+        flashColorElement.oninput = e -> flashColor = e.target.value;
 
         intervalElement.oninput = e -> {
             var v = Std.parseInt( e.target.value );
@@ -70,7 +67,8 @@ class App {
         }
 
         durationElement.oninput = e -> {
-            flashDuration = Std.parseInt( e.target.value );
+            var v = Std.parseInt( e.target.value );
+            flashDuration = v;
         }
 
         transitionElement.oninput = e -> {

@@ -4,7 +4,6 @@
 -cp src
 -dce full
 -debug
-#--no-traces
-#--macro strobo.macro.Build.app()
 -cmd cp -u res/html/app.html bin/index.html
+#-cmd cp -u res/web/manifest.json bin/manifest.json
 -cmd lessc res/style/app.less bin/app.css --no-color
