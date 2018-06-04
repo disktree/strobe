@@ -86,6 +86,13 @@ class App {
         //window.addEventListener( 'click', handleClick, false );
 
         window.requestAnimationFrame( update );
+
+        window.onblur = e -> {
+            controls.classList.add('hidden');
+        }
+        window.onfocus = e -> {
+            controls.classList.remove('hidden');
+        }
     }
 
 }

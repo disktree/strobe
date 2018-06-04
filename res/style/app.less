@@ -13,13 +13,19 @@ body {
 	left: 0px;
 	z-index: 1;
 	//transition: background-color 0.2s;
+	user-select: none;
 	-webkit-user-select: none;
 }
 
 .controls {
 	position: fixed;
-	top: 0px;
-	left: 0px;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%,-50%);
 	z-index: 1000;
 	//background-blend-mode: multiply;
+	display: inline-block;
+	&.hidden {
+		display: none;
+	}
 }
