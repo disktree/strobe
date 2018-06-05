@@ -1,4 +1,4 @@
 
-# Strobe
-
-Stroboscopic light | http://strobe.disktree.net/
+Strobe
+======
+> http://strobe.disktree.net/

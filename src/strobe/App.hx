@@ -44,54 +44,57 @@ class App {
 
     static function main() {
 
-        flashing = false;
-        timeStart = Time.now();
-        lastTimeFlash = timeStart;
+        window.onload = function(e){
 
-        element = cast document.querySelector( 'div.light' );
-        controls = cast document.querySelector( 'div.controls' );
+            flashing = false;
+            timeStart = Time.now();
+            lastTimeFlash = timeStart;
 
-        var backgroundColorElement : InputElement = cast document.querySelector( 'input[name="background-color"]' );
-        var intervalElement : InputElement = cast document.querySelector( 'input[name="interval"]' );
-        var durationElement : InputElement = cast document.querySelector( 'input[name="duration"]' );
-        var transitionElement : InputElement = cast document.querySelector( 'input[name="transition"]' );
-        var flashColorElement : InputElement = cast document.querySelector( 'input[name="flash-color"]' );
+            element = cast document.querySelector( 'div.light' );
+            controls = cast document.querySelector( 'div.controls' );
 
-        backgroundColorElement.oninput = e -> backgroundColor = e.target.value;
-        flashColorElement.oninput = e -> flashColor = e.target.value;
+            var backgroundColorElement : InputElement = cast document.querySelector( 'input[name="background-color"]' );
+            var intervalElement : InputElement = cast document.querySelector( 'input[name="interval"]' );
+            var durationElement : InputElement = cast document.querySelector( 'input[name="duration"]' );
+            var transitionElement : InputElement = cast document.querySelector( 'input[name="transition"]' );
+            var flashColorElement : InputElement = cast document.querySelector( 'input[name="flash-color"]' );
 
-        intervalElement.oninput = e -> {
-            var v = Std.parseInt( e.target.value );
-            durationElement.max = Std.string(v);
-            flashInterval = v;
-        }
+            backgroundColorElement.oninput = e -> backgroundColor = e.target.value;
+            flashColorElement.oninput = e -> flashColor = e.target.value;
 
-        durationElement.oninput = e -> {
-            var v = Std.parseInt( e.target.value );
-            flashDuration = v;
-        }
+            intervalElement.oninput = e -> {
+                var v = Std.parseInt( e.target.value );
+                durationElement.max = Std.string(v);
+                flashInterval = v;
+            }
 
-        transitionElement.oninput = e -> {
-            var v = Std.parseInt( e.target.value ) / 1000;
-            element.style.transition = 'background-color '+v+'s';
-        }
+            durationElement.oninput = e -> {
+                var v = Std.parseInt( e.target.value );
+                flashDuration = v;
+            }
 
-        backgroundColor = backgroundColorElement.value;
-        flashColor = flashColorElement.value;
-        flashInterval = Std.parseInt( intervalElement.value );
-        flashDuration = Std.parseInt( durationElement.value );
+            transitionElement.oninput = e -> {
+                var v = Std.parseInt( e.target.value ) / 1000;
+                element.style.transition = 'background-color '+v+'s';
+            }
 
-        //window.addEventListener( 'resize', handleWindowResize, false );
-        //window.addEventListener( 'mousemove', handleMouseMove, false );
-        //window.addEventListener( 'click', handleClick, false );
+            backgroundColor = backgroundColorElement.value;
+            flashColor = flashColorElement.value;
+            flashInterval = Std.parseInt( intervalElement.value );
+            flashDuration = Std.parseInt( durationElement.value );
 
-        window.requestAnimationFrame( update );
+            //window.addEventListener( 'resize', handleWindowResize, false );
+            //window.addEventListener( 'mousemove', handleMouseMove, false );
+            //window.addEventListener( 'click', handleClick, false );
 
-        window.onblur = e -> {
-            controls.classList.add('hidden');
-        }
-        window.onfocus = e -> {
-            controls.classList.remove('hidden');
+            window.requestAnimationFrame( update );
+
+            window.onblur = e -> {
+                //controls.classList.add('hidden');
+            }
+            window.onfocus = e -> {
+                //controls.classList.remove('hidden');
+            }
         }
     }
 
