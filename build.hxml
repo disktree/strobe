@@ -1,10 +1,8 @@
 -js bin/app.js
 -main strobe.App
+-lib om.audio
 -lib om.core
+#-lib om.gamepad
 -cp src
 -dce full
 -debug
--cmd cp -u res/html/app.html bin/index.html
--cmd mkdir -p bin/icon && cp -u res/icon/*.png bin/icon/
--cmd cp -u res/web/manifest.json bin/manifest.json
--cmd lessc res/style/app.less bin/app.css --no-color

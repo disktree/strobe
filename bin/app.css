@@ -1,0 +1,34 @@
+
+html {
+	width: 100%;
+	height: 100%;
+}
+
+body {
+	overflow: hidden;
+	margin: 0;
+	padding: 0;
+}
+
+#light {
+	z-index: 1;
+	position: fixed;
+	top: 0px;
+	right: 0px;
+	bottom: 0px;
+	left: 0px;
+	pointer-events: none;
+	user-select: none;
+	-webkit-user-select: none;
+}
+
+#controls {
+	z-index: 1000;
+	position: fixed;
+	top: 1rem;
+	left: 1rem;
+	transition: opacity 0.3s;
+}
+#controls.hidden {
+	opacity: 0;
+}
