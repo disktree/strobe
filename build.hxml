@@ -6,3 +6,4 @@
 -cp src
 -dce full
 -debug
+-D source-header=

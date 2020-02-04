@@ -8,6 +8,9 @@ body {
 	overflow: hidden;
 	margin: 0;
 	padding: 0;
+	background: #000;
+    color: #fff;
+	font-family: monospace;
 }
 
 #light {
@@ -20,14 +23,25 @@ body {
 	pointer-events: none;
 	user-select: none;
 	-webkit-user-select: none;
+	background: #000;
 }
 
 #controls {
-	z-index: 1000;
+	z-index: 10;
 	position: fixed;
-	top: 1rem;
-	left: 1rem;
-	transition: opacity 0.3s;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%,-50%);
+	width: 100%;
+	max-width: 320px;
+	display: flex;
+	flex-wrap: wrap;
+	transition: opacity 0.2s;
+}
+#controls * {
+	width: 100%;
+	padding: 10px;
+	margin-bottom: 8px;
 }
 #controls.hidden {
 	opacity: 0;

@@ -1,19 +1,25 @@
 package strobe;
 
-import js.Browser.console;
-import js.Browser.document;
-import js.Browser.window;
-import js.html.InputElement;
+import om.Browser;
+import om.Browser.console;
+import om.Browser.document;
+import om.Browser.window;
+import om.Json;
 import js.html.Element;
+import js.html.InputElement;
 import om.Time;
 
 class App {
 
+	static inline var STORAGE_ID = "disktree.strobe";
+
 	static var light : Element;
 	static var controls : Element;
 	
-	static var colorBackground = '#000';
-    static var colorFlash = '#fff';
+	static var enabled = true;
+
+	static var colorBackground = '#000000';
+    static var colorFlash = '#ffffff';
     static var flashInterval = 100;
 	static var flashDuration = 33;
 
@@ -25,8 +31,10 @@ class App {
 
         window.requestAnimationFrame( update );
 
-		var elapsed = Std.int( time - lastTimeFlash );
+		if( !enabled ) return;
 
+		var elapsed = Std.int( time - lastTimeFlash );
+		
 		if( flashing ) {
 			if( elapsed >= flashDuration ) {
 				light.style.backgroundColor = colorBackground;
@@ -44,14 +52,18 @@ class App {
 
 	static function main() {
 
+		console.log( '%cSTROBE.DISKTREE', 'color:#fff;background:#000;' );
+
+		var storage = Browser.localStorage;
+
 		light = document.getElementById('light');
 		controls = document.getElementById('controls');
 
 		var backgroundColorElement : InputElement = cast controls.querySelector( 'input[name="background-color"]' );
+		var flashColorElement : InputElement = cast controls.querySelector( 'input[name="flash-color"]' );
 		var intervalElement : InputElement = cast controls.querySelector( 'input[name="interval"]' );
 		var durationElement : InputElement = cast controls.querySelector( 'input[name="duration"]' );
 		var transitionElement : InputElement = cast controls.querySelector( 'input[name="transition"]' );
-		var flashColorElement : InputElement = cast controls.querySelector( 'input[name="flash-color"]' );
 		
 		backgroundColorElement.oninput = e -> colorBackground = e.target.value;
 		flashColorElement.oninput = e -> colorFlash = e.target.value;
@@ -73,7 +85,7 @@ class App {
 		}
 		
 		window.onkeydown = function(e) {
-			trace(e.keyCode);
+			//trace(e.keyCode);
 			switch e.keyCode {
 				case 89: //y
 					flashInterval = Std.int( Math.min( (flashInterval+10), 1000 ) );
@@ -91,8 +103,50 @@ class App {
 		timeStart = lastTimeFlash = Time.now();
 		window.requestAnimationFrame( update );
 
-		document.onmouseenter = e -> controls.classList.remove('hidden');
+		window.onclick = e -> controls.classList.remove('hidden');
 		document.onmouseleave = e -> controls.classList.add('hidden');
+
+		window.onbeforeunload = function(e){
+			//e.preventDefault();
+			//e.returnValue = '';
+			storage.setItem( STORAGE_ID, Json.stringify( {
+				colorBackground: colorBackground,
+				colorFlash: colorFlash,
+				flashInterval: flashInterval,
+				flashDuration: flashDuration
+			} ) );
+			return null;
+		}
+
+		var _settings = storage.getItem( STORAGE_ID );
+		if( _settings != null ) {
+			var settings = Json.parse( _settings );
+			colorBackground = backgroundColorElement.value = settings.colorBackground;
+			colorFlash = flashColorElement.value = settings.colorFlash;
+			flashInterval = settings.flashInterval;
+			intervalElement.value = Std.string( flashInterval );
+			flashDuration = settings.flashDuration;
+			durationElement.value = Std.string( flashDuration );
+		}
+
+		document.ondblclick = function(e){
+			trace(e);
+			if( document.fullscreen ) {
+				document.exitFullscreen();
+			} else {
+				document.documentElement.requestFullscreen();
+			}
+		}
+
+		window.onmessage = function(e){
+			trace(e);
+			//TODO
+			//window.alert(e.data);
+			switch e.data {
+			case 'on': enabled = true;
+			case 'off': enabled = false;
+			}
+		};
 
 		/*
 		window.onmousedown = function(e) {
