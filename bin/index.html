@@ -11,12 +11,12 @@
 
 		<meta name="twitter:card" content="summary_large_image"/>
         <meta name="twitter:title" content="Strobe"/>
-        <meta name="twitter:description" value="Stroboscopic flashlight"/>
-    	<meta name="twitter:image" content="http://strobe.disktree.net/strobe.gif"/>
+        <meta name="twitter:description" value="Stroboscopic Flashlight"/>
+    	<meta name="twitter:image" content="https://disktree.net/app/strobe/strobe.gif"/>
 
 		<title>STROBE.DISKTREE™</title>
-		
-		<link rel="shortcut icon" href="https://disktree.net/favicon.ico">
+
+		<link rel="shortcut icon" href="https://disktree.net/favicon.svg">
 		<link rel="stylesheet" type="text/css" href="app.css">
 		<link rel="manifest" href="manifest.json">
 
@@ -25,13 +25,17 @@
 	</head>
 
 	<body>
-		<div id="light"></div>
+		<div id="strobe"></div>
 		<div id="controls">
-			<input type="color" name="background-color" value="#000000" title="background color">
-			<input type="color" name="flash-color" value="#ffffff" title="foreground color">
-			<input type="range" name="interval" value="400" min="16" max="1000" step="1" title="interval">
-			<input type="range" name="duration" value="100" min="16" max="1000" step="1" title="duration">
-			<input type="range" name="transition" value="0" min="0" max="1000" step="1" title="transition">
+			<div class="colors">
+				<input type="color" name="background-color" value="#000000" title="background color">
+				<input type="color" name="flash-color" value="#ffffff" title="foreground color">
+			</div>
+			<div class="time">
+				<input type="range" name="interval" value="400" min="16" max="1000" step="1" title="interval">
+				<input type="range" name="duration" value="100" min="16" max="1000" step="1" title="duration">
+				<input type="range" name="transition" value="0" min="0" max="1000" step="1" title="transition">
+			</div>
 		</div>
 	</body>
 </html>
