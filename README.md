@@ -1,4 +1,4 @@
 
 Strobe
 ======
-> http://strobe.disktree.net/
+> https://disktree.net/app/strobe/
